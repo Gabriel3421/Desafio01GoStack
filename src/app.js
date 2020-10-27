@@ -7,6 +7,23 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+function middlewareLogs(request, response, next){
+  console.log(
+    'Request logged:',
+    'Method:',
+    request.method,
+    'Path:',
+    request.path,
+    'Query:',
+    request.query,
+    'Body:',
+    request.body,
+    'Params:',
+    request.params,
+  );
+  return next();
+}
+ app.use(middlewareLogs)
 const repositories = [];
 
 app.get("/repositories", (request, response) => {
